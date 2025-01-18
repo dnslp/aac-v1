@@ -295,3 +295,163 @@ h1 {
     gap: 2px;
     justify-content: center;
 }
+
+/* Basic Controls */
+.basic-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Advanced Settings */
+.advanced-controls {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 2px solid #ddd;
+}
+
+/* Toggle Button */
+.advanced-controls-toggle {
+    text-align: center;
+}
+
+.action-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Basic Controls */
+.basic-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Advanced Controls */
+.advanced-controls {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Action Buttons */
+.action-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Symbol Container */
+.symbol-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.symbol-item:hover {
+    transform: scale(1.05);
+    border-color: #0056b3;
+}
+
+/* Symbol and Label Styling */
+.symbol {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.label {
+    font-size: 0.8rem;
+    color: #555;
+    text-align: center;
+}
+
+/* Filter bar (hidden by default) */
+.filter-bar {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Action Button */
+.action-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+/* Mobile Responsive Layout */
+@media (max-width: 768px) {
+    .basic-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    .action-button {
+        font-size: 0.9rem;
+    }
+}
+
+
+.action-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .basic-controls {
+        flex-wrap: wrap; /* Wrap buttons on smaller screens */
+        gap: 5px;
+    }
+
+    .action-button {
+        font-size: 0.9rem; /* Slightly smaller buttons for smaller screens */
+    }
+}
+

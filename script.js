@@ -1,4 +1,5 @@
-    import { items } from './items.js'; // Import items.js
+
+import { items } from './items.js'; // Import items.js
     console.log(items)
     console.log('version 1')
     const symbolContainer = document.getElementById('symbolContainer');
@@ -18,6 +19,7 @@
     let originalOrder = [...items];
     let currentItems = [...items];
     let isGlossaryView = false; // Tracks whether we are in glossary mode
+
 
     // Populate filter options
     function populateFilterOptions() {
@@ -205,3 +207,20 @@
         renderItems();
         populateVoices();
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterBar = document.querySelector('.filter-bar');
+        const toggleButton = document.getElementById('toggleFilterBar');
+    
+        // Toggle visibility on button click
+        toggleButton.addEventListener('click', () => {
+            if (filterBar.style.display === 'none' || !filterBar.style.display) {
+                filterBar.style.display = 'block';
+                toggleButton.textContent = 'Hide Filters';
+            } else {
+                filterBar.style.display = 'none';
+                toggleButton.textContent = 'Show Filters';
+            }
+        });
+    });
+    
