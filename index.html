@@ -4,59 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emoji Speaker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .emoji-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .emoji-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            border: 2px solid #007BFF;
-            width: var(--emoji-size, 100px);
-            height: var(--emoji-size, 100px);
-            justify-content: center;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-
-        .emoji-item:hover {
-            border-color: #0056b3;
-        }
-
-        .emoji {
-            font-size: calc(var(--emoji-size, 100px) / 2);
-        }
-
-        .label {
-            margin-top: 5px;
-            font-size: calc(var(--emoji-size, 100px) / 6);
-            color: #555;
-            text-align: center;
-        }
-
-        .controls {
-            margin-top: 20px;
-        }
-
-        select, button {
-            padding: 5px;
-            font-size: 1rem;
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Click an Emoji to Hear Its Name</h1>
@@ -70,155 +18,17 @@
         <select id="filterSystem">
             <option value="all">All</option>
         </select>
+        <label for="filterTag">Filter by tag: </label>
+        <select id="filterTag">
+            <option value="all">All</option>
+        </select>
         <label for="voiceSelect">Choose a voice: </label>
         <select id="voiceSelect"></select>
     </div>
 
     <div class="emoji-container" id="emojiContainer"></div>
 
-    <script>
-        const emojiContainer = document.getElementById('emojiContainer');
-        const decreaseSizeButton = document.getElementById('decreaseSize');
-        const increaseSizeButton = document.getElementById('increaseSize');
-        const sortAscendingButton = document.getElementById('sortAscending');
-        const sortDescendingButton = document.getElementById('sortDescending');
-        const filterSystemSelect = document.getElementById('filterSystem');
-
-        let currentSize = 100;
-        const minSize = 50;
-        const maxSize = 200;
-
-        const items = [
-            { symbol: "😊", type: "emoji", system: "device",label: "Smiling Face" },
-            { symbol: "🦉", type: "emoji", system: "device",label: "Owl" },
-            { symbol: "🪰", type: "emoji", system: "device",label: "Fly" },
-            { symbol: "🐝", type: "emoji", system: "device",label: "Bee" },
-            { symbol: "🐞", type: "emoji", system: "device",label: "Ladybug" },
-            { symbol: "🦓", type: "emoji", system: "device",label: "Zebra" },
-            { symbol: "🐙", type: "emoji", system: "device",label: "Octopus" },
-            { symbol: "🌙", type: "emoji", system: "device",label: "Moon" },
-            { symbol: "🦀", type: "emoji", system: "device",label: "Crab" },
-            { symbol: "🦞", type: "emoji", system: "device",label: "Lobster" },
-                { symbol: "😂", type: "emoji", system: "device",label: "Face with Tears of Joy" },
-    { symbol: "❤️", type: "emoji", system: "device",label: "Red Heart" },
-    { symbol: "😍", type: "emoji", system: "device",label: "Smiling Face with Heart-Eyes" },
-    { symbol: "🤩", type: "emoji", system: "device",label: "Star-Struck" },
-    { symbol: "😊", type: "emoji", system: "device",label: "Smiling Face" },
-    { symbol: "🙏", type: "emoji", system: "device",label: "Folded Hands" },
-    { symbol: "🔥", type: "emoji", system: "device",label: "Fire" },
-    { symbol: "🥰", type: "emoji", system: "device",label: "Smiling Face with Hearts" },
-    { symbol: "🤣", type: "emoji", system: "device",label: "Rolling on the Floor Laughing" },
-    { symbol: "👍", type: "emoji", system: "device",label: "Thumbs Up" },
-    { symbol: "🎉", type: "emoji", system: "device",label: "Party Popper" },
-    { symbol: "💔", type: "emoji", system: "device",label: "Broken Heart" },
-    { symbol: "👏", type: "emoji", system: "device",label: "Clapping Hands" },
-    { symbol: "🎂", type: "emoji", system: "device",label: "Birthday Cake" },
-    { symbol: "🥳", type: "emoji", system: "device",label: "Partying Face" },
-    { symbol: "😎", type: "emoji", system: "device",label: "Smiling Face with Sunglasses" },
-    { symbol: "🤔", type: "emoji", system: "device",label: "Thinking Face" },
-    { symbol: "😢", type: "emoji", system: "device",label: "Crying Face" },
-    { symbol: "🤗", type: "emoji", system: "device",label: "Hugging Face" },
-    { symbol: "✨", type: "emoji", system: "device",label: "Sparkles" },
-            { symbol: "https://i.imgur.com/HSPpyK1.png", type: "image", system: "plq2g",label: "All Done" },
-            { symbol: "https://i.imgur.com/0jBXcNb.png", type: "image", system: "plq2g",label: "More" }
-        ];
-
-        function populateFilterOptions() {
-            const systems = [...new Set(items.map(item => item.system))];
-            systems.forEach(system => {
-                const option = document.createElement('option');
-                option.value = system;
-                option.textContent = system;
-                filterSystemSelect.appendChild(option);
-            });
-        }
-
-        function renderItems(filter = "all") {
-            emojiContainer.innerHTML = '';
-            const filteredItems = filter === "all" ? items : items.filter(item => item.system === filter);
-            filteredItems.forEach(item => {
-                const emojiItem = document.createElement('div');
-                emojiItem.classList.add('emoji-item');
-                emojiItem.setAttribute('data-label', item.label);
-
-                if (item.type === 'emoji') {
-                    const emoji = document.createElement('div');
-                    emoji.classList.add('emoji');
-                    emoji.textContent = item.symbol;
-                    emojiItem.appendChild(emoji);
-                } else if (item.type === 'image') {
-                    const img = document.createElement('img');
-                    img.src = item.symbol;
-                    img.alt = item.label;
-                    img.style.width = '80%';
-                    img.style.height = '80%';
-                    emojiItem.appendChild(img);
-                }
-
-                const label = document.createElement('div');
-                label.classList.add('label');
-                label.textContent = item.label;
-                emojiItem.appendChild(label);
-
-                emojiItem.addEventListener('click', () => {
-                    speakText(item.label);
-                });
-
-                emojiContainer.appendChild(emojiItem);
-            });
-        }
-
-        function adjustSize(amount) {
-            currentSize = Math.max(minSize, Math.min(maxSize, currentSize + amount));
-            document.documentElement.style.setProperty('--emoji-size', `${currentSize}px`);
-        }
-
-        function sortEmojis(order) {
-            items.sort((a, b) => {
-                const labelA = a.label.toLowerCase();
-                const labelB = b.label.toLowerCase();
-                return order === 'asc' ? labelA.localeCompare(labelB) : labelB.localeCompare(labelA);
-            });
-            renderItems(filterSystemSelect.value);
-        }
-
-        decreaseSizeButton.addEventListener('click', () => adjustSize(-10));
-        increaseSizeButton.addEventListener('click', () => adjustSize(10));
-        sortAscendingButton.addEventListener('click', () => sortEmojis('asc'));
-        sortDescendingButton.addEventListener('click', () => sortEmojis('desc'));
-        filterSystemSelect.addEventListener('change', () => renderItems(filterSystemSelect.value));
-
-        let voices = [];
-
-        function populateVoices() {
-            voices = window.speechSynthesis.getVoices().filter(voice =>
-                voice.lang.startsWith('en') &&
-                (voice.lang.includes('US') || voice.lang.includes('GB') || voice.lang.includes('AU'))
-            );
-            const voiceSelect = document.getElementById('voiceSelect');
-            voiceSelect.innerHTML = '';
-            voices.forEach((voice, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = `${voice.name} (${voice.lang})`;
-                voiceSelect.appendChild(option);
-            });
-        }
-
-        function speakText(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            const selectedVoiceIndex = document.getElementById('voiceSelect').value;
-            if (voices[selectedVoiceIndex]) {
-                utterance.voice = voices[selectedVoiceIndex];
-            }
-            window.speechSynthesis.speak(utterance);
-        }
-
-        window.speechSynthesis.onvoiceschanged = populateVoices;
-        populateVoices();
-
-        populateFilterOptions();
-        renderItems();
-    </script>
+    <script type="module" src="script.js"></script>
+    
 </body>
 </html>
