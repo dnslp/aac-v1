@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Ensure all elements are correctly selected after the DOM is loaded
+    import { items } from './items.js'; // Import items.js
+    console.log(items)
     const symbolContainer = document.getElementById('symbolContainer');
     const decreaseSizeButton = document.getElementById('decreaseSize');
     const increaseSizeButton = document.getElementById('increaseSize');
@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         symbolContainer.innerHTML = '';
 
         if (isGlossaryView) {
+            // Render a flat sorted view (glossary mode)
             const filteredItems = currentItems.filter(item => {
                 const systemMatch = filterSystem === "all" || item.system === filterSystem;
                 const tagMatch = filterTag === "all" || (item.tags && item.tags.includes(filterTag));
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             filteredItems.forEach(item => createSymbolItem(item));
         } else {
+            // Render grouped view (default mode)
             const groupedItems = currentItems.reduce((groups, item) => {
                 if (filterSystem !== "all" && item.system !== filterSystem) return groups;
                 if (filterTag !== "all" && !(item.tags && item.tags.includes(filterTag))) return groups;
@@ -112,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         label.textContent = item.label;
         symbolItem.appendChild(label);
 
+        // Add click event to speak the label
         symbolItem.addEventListener('click', () => {
             speakText(item.label);
         });
@@ -119,28 +122,31 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(symbolItem);
     }
 
-    // Other functions remain unchanged
+    // Adjust symbol size
     function adjustSize(amount) {
         currentSize = Math.max(minSize, Math.min(maxSize, currentSize + amount));
         document.documentElement.style.setProperty('--symbol-size', `${currentSize}px`);
     }
 
+    // Sort symbols
     function sortSymbols(order) {
-        isGlossaryView = true;
+        isGlossaryView = true; // Switch to glossary view
         currentItems.sort((a, b) => {
             const labelA = a.label.toLowerCase();
             const labelB = b.label.toLowerCase();
             return order === 'asc' ? labelA.localeCompare(labelB) : labelB.localeCompare(labelA);
         });
-        renderItems();
+        renderItems(); // Re-render the items in glossary mode
     }
 
+    // Reset symbols to original order
     function resetSymbols() {
-        isGlossaryView = false;
-        currentItems = [...originalOrder];
-        renderItems();
+        isGlossaryView = false; // Return to grouped view
+        currentItems = [...originalOrder]; // Reset to original order
+        renderItems(); // Re-render the items in grouped view
     }
 
+    // Populate voices for text-to-speech
     function populateVoices() {
         voices = window.speechSynthesis.getVoices().filter(voice =>
             voice.lang.startsWith('en') &&
@@ -156,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Speak text
     function speakText(text) {
         const utterance = new SpeechSynthesisUtterance();
         const selectedVoiceIndex = document.getElementById('voiceSelect').value;
@@ -178,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sortAscendingButton.addEventListener('click', () => sortSymbols('asc'));
     sortDescendingButton.addEventListener('click', () => sortSymbols('desc'));
 
+    // Add Reset Button
     const resetButton = document.createElement('button');
     resetButton.id = 'reset';
     resetButton.classList.add('action-button');
@@ -190,9 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.speechSynthesis.onvoiceschanged = populateVoices;
 
-    // Initialize on DOMContentLoaded
-    populateFilterOptions();
-    populateTagOptions();
-    renderItems();
-    populateVoices();
-});
+    document.addEventListener('DOMContentLoaded', () => {
+        populateFilterOptions();
+        populateTagOptions();
+        renderItems();
+        populateVoices();
+    });
