@@ -13,7 +13,7 @@ import { items } from './items.js'; // Import items.js
     let voices = [];
     let currentSize = 100;
     const minSize = 50;
-    const maxSize = 200;
+    const maxSize = 300;
 
     // Preserve original order and current working items
     let originalOrder = [...items];
@@ -74,6 +74,7 @@ import { items } from './items.js'; // Import items.js
 
                 const header = document.createElement('h2');
                 header.textContent = system.charAt(0).toUpperCase() + system.slice(1);
+                header.className = "header"
                 section.appendChild(header);
 
                 const symbolSection = document.createElement('div');
@@ -189,12 +190,9 @@ import { items } from './items.js'; // Import items.js
     sortDescendingButton.addEventListener('click', () => sortSymbols('desc'));
 
     // Add Reset Button
-    const resetButton = document.createElement('button');
-    resetButton.id = 'reset';
-    resetButton.classList.add('action-button');
-    resetButton.textContent = 'Reset';
+    const resetButton = document.getElementById('reset');
+  
     resetButton.addEventListener('click', resetSymbols);
-    document.querySelector('.button-group').appendChild(resetButton);
 
     filterSystemSelect.addEventListener('change', () => renderItems(filterSystemSelect.value, filterTagSelect.value));
     filterTagSelect.addEventListener('change', () => renderItems(filterSystemSelect.value, filterTagSelect.value));
@@ -215,7 +213,7 @@ import { items } from './items.js'; // Import items.js
         // Toggle visibility on button click
         toggleButton.addEventListener('click', () => {
             if (filterBar.style.display === 'none' || !filterBar.style.display) {
-                filterBar.style.display = 'block';
+                filterBar.style.display = 'inline-grid';
                 toggleButton.textContent = 'Hide Filters';
             } else {
                 filterBar.style.display = 'none';
