@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Speaker</title>
+    <title>symbol Speaker</title>
     <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    <h1>Click an Emoji to Hear Its Name</h1>
-
+    <h1>Click an symbol to Hear Its Name</h1>
     <div class="controls">
-        <button id="decreaseSize">-</button>
-        <button id="increaseSize">+</button>
-        <button id="sortAscending">Sort A-Z</button>
-        <button id="sortDescending">Sort Z-A</button>
-        <label for="filterSystem">Filter by system: </label>
-        <select id="filterSystem">
-            <option value="all">All</option>
-        </select>
-        <label for="filterTag">Filter by tag: </label>
-        <select id="filterTag">
-            <option value="all">All</option>
-        </select>
-        <label for="voiceSelect">Choose a voice: </label>
-        <select id="voiceSelect"></select>
+        <div class="button-group">
+            <button id="decreaseSize" class="action-button">Smaller</button>
+            <button id="increaseSize" class="action-button">Bigger</button>
+            <button id="sortAscending" class="action-button">A-Z</button>
+            <button id="sortDescending" class="action-button">Z-A</button>
+        </div>
+        <div class="filter-bar">
+            <label for="filterSystem" class="filter-label">Filter by system:</label>
+            <select id="filterSystem" class="styled-dropdown">
+                <option value="all">All</option>
+            </select>
+    
+            <label for="filterTag" class="filter-label">Filter by tag:</label>
+            <select id="filterTag" class="styled-dropdown">
+                <option value="all">All</option>
+            </select>
+    
+            <label for="voiceSelect" class="filter-label">Choose a voice:</label>
+            <select id="voiceSelect" class="styled-dropdown"></select>
+        </div>
     </div>
 
-    <div class="emoji-container" id="emojiContainer"></div>
+    <div class="symbol-container" id="symbolContainer">
+        
+    </div>
 
-    <script type="module" src="script.js"></script>
-    
+    <script src="script.js" type="module"></script>
 </body>
 </html>
