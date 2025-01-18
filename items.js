@@ -1,7 +1,22 @@
 export const items = [
     { "symbol": "😊", "type": "emoji", "system": "device", "label": "Smiling Face", "tags": ["emotion"] },
     { "symbol": "🦉", "type": "emoji", "system": "device", "label": "Owl", "tags": ["nature"] },
+    { "symbol": "🪰", "type": "emoji", "system": "device", "label": "Fly", "tags": ["nature"] },
+    { "symbol": "🐝", "type": "emoji", "system": "device", "label": "Bee", "tags": ["nature"] },
+    { "symbol": "🐞", "type": "emoji", "system": "device", "label": "Ladybug", "tags": ["nature"] },
+    { "symbol": "🦓", "type": "emoji", "system": "device", "label": "Zebra", "tags": ["nature"] },
+    { "symbol": "🐙", "type": "emoji", "system": "device", "label": "Octopus", "tags": ["nature"] },
+    { "symbol": "🌙", "type": "emoji", "system": "device", "label": "Moon", "tags": ["nature"] },
+    { "symbol": "🦀", "type": "emoji", "system": "device", "label": "Crab", "tags": ["nature"] },
+    { "symbol": "🦞", "type": "emoji", "system": "device", "label": "Lobster", "tags": ["nature"] },
+    { "symbol": "😂", "type": "emoji", "system": "device", "label": "Face with Tears of Joy", "tags": ["emotion"] },
+    { "symbol": "❤️", "type": "emoji", "system": "device", "label": "Red Heart", "tags": ["emotion"] },
+    { "symbol": "😍", "type": "emoji", "system": "device", "label": "Smiling Face with Heart-Eyes", "tags": ["emotion"] },
+    { "symbol": "🤩", "type": "emoji", "system": "device", "label": "Star-Struck", "tags": ["emotion"] },
+    { "symbol": "🙏", "type": "emoji", "system": "device", "label": "Folded Hands", "tags": ["symbols"] },
+    { "symbol": "🔥", "type": "emoji", "system": "device", "label": "Fire", "tags": ["nature"] },
     { "symbol": "🎂", "type": "emoji", "system": "device", "label": "Birthday Cake", "tags": ["food"] },
     { "symbol": "✨", "type": "emoji", "system": "device", "label": "Sparkles", "tags": ["symbols"] },
-    { "symbol": "https://i.imgur.com/HSPpyK1.png", "type": "image", "system": "plq2g", "label": "All Done", "tags": ["symbols"] }
+    { "symbol": "https://i.imgur.com/HSPpyK1.png", "type": "image", "system": "plq2g", "label": "All Done", "tags": ["symbols"] },
+    { "symbol": "https://i.imgur.com/0jBXcNb.png", "type": "image", "system": "plq2g", "label": "More", "tags": ["symbols"] }
 ];
